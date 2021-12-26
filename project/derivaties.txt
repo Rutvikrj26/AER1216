@@ -1,0 +1,71 @@
+%% Longitudinal terms
+
+Cxo = -P.CDo*cos(alpha) + P.CLo*sin(alpha);
+Cxa = -P.CDa*cos(alpha) + P.CLa*sin(alpha);
+Cxq = -P.CDq*cos(alpha) + P.CLq*sin(alpha);
+Cxdelta_e = -P.CDdelta_e*cos(alpha) + P.CLdelta_e*sin(alpha);
+
+Xu  = (2*qs*Cxo - rho*Sprop*Ue*C_T)/m;%
+Xw  = Cxa*qs/m;
+Xq  = Cxq*qs1*c_bar/(2*m);
+Xdelta_e = Cxdelta_e*qs1_2/m;
+Xdelta_t = 0;
+
+Czo = -P.CLo*cos(alpha) - P.CDo*sin(alpha);
+Cza = -P.CLa*cos(alpha) - P.CDa*sin(alpha);
+Czq = -P.CLq*cos(alpha) - P.CDq*sin(alpha);
+Czdelta_e = -P.CLdelta_e*cos(alpha) - P.CDdelta_e*sin(alpha);
+
+Zu  = 2*qs*Czo/m ;
+Zw  = Cza*qs/m;
+Zq  = Ue + Czq*qs1*c_bar/(2*m); %% no m term in ss matrix
+Zdelta_e = Czdelta_e*qs1_2/m;
+
+Cmo = P.Cmo;
+Cma = P.Cma;
+Cmq = P.Cmq;
+Cmdelta_e = P.Cmdelta_e;
+
+Mu  = 2*qs*c_bar*Cmo/Iyy;
+Mw  = Cma * qs * c_bar/Iyy;
+Mq  = Cmq*qs1*c_bar*c_bar/(2*Iyy);
+Mdelta_e = Cmdelta_e*qs1_2*c_bar/Iyy;
+
+%%  Lateral terms
+
+Cyo = P.Cyo;
+Cyb = P.Cyb;
+Cyp = P.Cyp;
+Cyr = P.Cyr;
+Cydelta_a = P.Cydelta_a;
+Cydelta_r = P.Cydelta_r;
+
+Yv = 2*Cyo*qs/m + qs*Cyb/m;
+Yp = Cyp*qs1*b/(2*m);
+Yr = -Ue + (Cyr*qs1*b/(2*m));
+Ydelta_a = Cydelta_a*qs1_2/m;
+Ydelta_r = Cydelta_r*qs1_2/m;
+
+Cpb = P.Clb;
+Cpp = P.Clp;
+Cpr = P.Clr;
+Cpdelta_a = P.Cldelta_a;
+Cpdelta_r = P.Cldelta_r;
+
+Lv = Cpb*qs*b;
+Lp = Cpp*qs1*b^2/2;
+Lr = Cpr*qs*b^2/2;
+Ldelta_a = Cpdelta_a * qs1_2 * b;
+Ldelta_r = Cpdelta_r * qs1_2 * b;
+
+Crb = P.Cnb;
+Crp = P.Cnp;
+Crr = P.Cnr;
+Crdelta_a = P.Cndelta_a;
+Crdelta_r = P.Cndelta_r;
+
+Nv = Crb * qs * b;
+Np = Crp * qs1 * b^2 / 2;
+Nr = Crr * qs1 * b^2 / 2;
+Ndelta_a = Crdelta_a * qs1_2 * b;
+Ndelta_r = Crdelta_r * qs1_2 * b;

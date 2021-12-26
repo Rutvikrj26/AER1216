@@ -1,0 +1,14 @@
+In part c, we have linearized our equations and hence, we will be looking to use a linear controller.
+There are two controllers talked about in the presentation.
+1. Pole Placement 
+2. Linear Quadratic Regulator
+The Pole Placement method has certain uncertaininty regarding eigen values, and given that I don't have much 
+experience in designing control systems, I will not prefer the Pole Placement Controller
+The Linear Quadratic Regulator is a more regularized with a standard procedure and hence, I will prefer the 
+Linear Quadratic Regulator.
+The Linear Quadratic Regulator works on the concept of optimal control by minizing a predefined cost function.
+The Cost here is a linear system of equations where we penalize both the control effort and the error.
+We have the Linear Dynamical control system for State-Space Equation, we have the reference equilibrium points
+and the cost function which needs to be optimized. We apply the principles of dynamic programming to go from the
+final state to the intial state. The recursive relation in the equations gives us the net value which include current cost, Action Cost, 
+and the Closed loop dynamics - (transpose(state-space)*Future Value matrix*state-space).

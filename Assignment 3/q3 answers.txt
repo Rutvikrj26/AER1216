@@ -1,0 +1,26 @@
+1.  In the cruising situation, the drag and thrust are balaced perfectly. Now in case, the 
+	thrust is suddenly cut-off, the drag will start reducing the forward speed of the aeroplane
+	ultimately leading to the stall condition. For extending the Flight time, pilot can try to
+	decrease the altitude and at the same time, increase the angle of attack on the wings. This
+	will reduce the Thrust required. The pilot must try to maintain the plane at the minimum drag
+	location in the Thrust required curve.
+
+2.	Thrust is a function of both the lift and the Drag. Thus, with increase in the velocity, both
+	the lift and the drag increase, but the term L/D depends on the relative increase. Furthermore,
+	the Lift coefficient and the Drag Coefficient depend on the nagle of attack, which is also a
+	function of velocity. As Velocity increases, angle of attack decreases, and thus, Cl decreases.
+	The dynamics of velocity and angle of attack determine the Thrust required.
+	
+3.	Considering a regular civil flight, with the mission of having the best fuel economy, we choce of 
+	propeller becomes a simple question of the power requirements. Now, We need to decide on the pitch
+	and the Diameter of a propeller, keeping in mind that we need to be able to have the required
+	Lift at the cruise speed so as to balance weight. For the given situation, we will further consider
+	the velcoity at which we want the cruising speed. So we start wuth the velocity, decide the L/D 
+	for minimum thrust requirements form the plot. Once we have the thrust, we know the requirement
+	of thrust from the propeller. Next, we pickup the APC database and search for propellers of suitabke
+	size according to the plane size and manueverability requiremnts. Once we select a few propellers, we
+	calculate the power requirements for each propeller, as performed in the class, and then keep the one
+	with the minimum power requirements.
+	
+	 
+	

@@ -1,0 +1,79 @@
+%AER1216_Assignment3_q1
+clear
+
+%% Background Information
+
+rho_s = 1.2250;
+temp_s = 288.16;
+
+cl_max = 1.2;
+S = 20; % in m2
+W = 10000; %in N
+AR = 10;
+cd_0 = 0.03;
+epsilon = 0.7;
+K = 1/(pi*epsilon*AR);
+cl_TR_min = sqrt(cd_0/K);
+Ts = 5000; % in N
+
+%% Part A
+
+heights = 0:50:15000;
+
+V_min = zeros(length(heights),1);
+V_TR_min = zeros(length(heights),1);
+
+for i = 1:length(heights)
+    h_a = heights(i);
+    rho_curr = atm(h_a); % Rho at current Height
+    V_min(i) = sqrt(2*W/(S*cl_max*rho_curr));
+    V_TR_min(i) = sqrt(2*(W/S)/(rho_curr*cl_TR_min));
+end
+
+plot(heights,V_TR_min);
+hold on
+plot(heights,V_min);
+legend({'V optimal for TR min','V min'});
+hold off
+
+%% Part B
+
+alt_b = zeros(5,1);
+cr_max = zeros(5,1);
+v_cr_max = zeros(5,1);
+
+j = 1;
+cr_max(length(cr_max)) = 1; % to initiate the loop
+while cr_max(length(cr_max)) >= 0.5
+    alt_b(j) = 50*(j-1);
+    rho_curr = atm(alt_b(j)); % Rho at current Height
+    T = (rho_curr/rho_s)*Ts;
+    v_cr_max(j) = sqrt((T/S)*(1 + sqrt(1+(12*cd_0*K/((T/W)^2))))/(3*rho_curr*cd_0));
+    cr_max(j) = v_cr_max(j)*((T/W) - ((0.5*rho_curr*cd_0*v_cr_max(j)^2)/(W/S)) - ((2*K*W)/(S*rho_curr*v_cr_max(j)^2)));        
+    j = j+1;
+end
+
+plot(alt_b,cr_max);
+
+%alt_b(length(alt_b))
+
+
+
+%% Generating the Standard Atmosphere conditions till 15 Km
+function rho = atm(h)    % h taken in Km
+
+rho_s = 1.2250;
+temp_s = 288.16;
+
+temp = temp_s + -0.0065*h;
+
+    if h <= 11000        
+        rho = rho_s*(temp/temp_s)^-(9.8/(-0.0065*287 + 1));
+    else
+        rho_1 = rho_s*(temp/temp_s)^-(9.8/(-0.0065*287 + 1));
+        rho = rho_1*(2.718)^-(9.8*(h-11)/(287*temp));
+    end
+end
+
+
+

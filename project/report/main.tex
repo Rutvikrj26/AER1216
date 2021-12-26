@@ -1,0 +1,59 @@
+\documentclass[12pt]{report}
+
+%load any additional packages
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{multicol}
+\usepackage{times}
+\usepackage{listings}
+\usepackage {amsmath}
+
+\usepackage[margin=1in]{geometry}
+%\setlength{\topmargin}{0in}
+%\setlength{\oddsidemargin}{0in}
+%\setlength{\evensidemargin}{-0.08in}
+%\setlength{\textheight}{8.5in}
+%\setlength{\textwidth}{6.5in}
+
+\def\mytitle{Simulating a 3-D Vertical Axis Wind Turbine using Actuator Method}
+\def\myname{Rutvik S. Solanki}
+\def\mydegree{Bachelor of Technology, Mechanical Engineering}
+\def\mysupervisor{ Prof. Vamsi K. Chalamalla, Prof. Sawan S. Sinha, Prof. Mayank Kumar}
+\def\myrollno{2017ME10614}
+\def\mydep{Mechanical Engineering}
+\def\mydegreedate{07/2021}
+
+\begin{document}
+ \baselineskip=18pt plus1pt
+ \setcounter{secnumdepth}{3}
+ \setcounter{tocdepth}{3}
+ \pagenumbering{roman}
+ 
+ %Front Matter
+ \include{./FrontMatter/titlePage}
+% \include{./FrontMatter/certificate}
+% \include{./FrontMatter/dedication}
+% \include{./FrontMatter/acknowledgements}
+% \include{./FrontMatter/nomenclature}
+
+ \tableofcontents
+ \listoffigures
+ \listoftables
+
+ %Main material
+
+ \clearpage
+ \pagenumbering{arabic}
+
+ \include{./FrontMatter/overview} 
+ \include{./Chapters/Fixed_wing}
+ \include{./Chapters/Multirotor}
+ \include{./Chapters/conclusions}
+ 
+ %Bibliography
+ \addcontentsline{toc}{chapter}{Bibliography}
+ \bibliographystyle{amsplain}
+ \bibliography{references.bib}
+ 
+\end{document}

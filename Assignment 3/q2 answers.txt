@@ -1,0 +1,158 @@
+Code :
+
+clear
+% AER1216 Assignment3 Q2 
+
+W = 8; % in N
+cd = 0.7;
+S = 0.01; % in m2
+k_v = 1050*(2*pi/60); % in rpm/V
+i_0 = 0.4; % in A
+r_m = 0.12; % in Ohms
+k_t = 1/k_v;
+r_e = 0.05; % in Ohms
+
+rad = 4*0.0254; % in m
+A = 4*pi*(rad)^2; % in m2
+rho = 1.225; % in Kg/m3
+
+%% Q2 - Part A
+p_ind_momentum = sqrt((W^3)/(2*rho*A))
+
+%% Q2 - Part B
+cells = 3;
+power = (1300/1000)*3600; % in A-s
+e_b = cells*3.7*power;
+t_e_momentum = e_b/(p_ind_momentum)
+
+%% Q2 - Part C
+% Hover -> V = 0
+% We need Thrust  = 2N, Which we recieve for 5000 RPM
+% Thus, Power Required = 15.6596973 W * 4
+
+p_actual = 15.6596973 * 4
+
+%% Q2 - Part D
+t_e_actual_ideal = e_b/p_actual
+
+%% Q2 - Part E
+t_e_actual_actual = t_e_actual_ideal*0.85*0.95
+
+%% Q2 - Part F
+c =  12.3063;
+
+d =  -0.000328;
+
+b =  -0.008112;
+
+e =  -4.7809e-7;
+
+a =  -7.7835e-7;
+
+f = 1.4086e-10;
+
+T = W/4; % in N
+ct = 0.1415;
+n = sqrt(T/(ct*rho*(2*rad)^4));
+Q = 0.030166949343; % in N-m
+i_m = Q/k_t + i_0; % in A
+omg = 5000;
+v_mi = omg/k_v + i_m*r_m;
+v_et = v_mi + i_m*r_e;
+
+dt = 1; % in s
+D = 1; % in mA-hr
+t = 0;
+k_e = 1;
+
+while D <= power && k_e >= 1
+    
+g = (a*D^2 + b*D + c)/(1 + d*D + e*D^2 + f*D^3);
+k_e = (v_et*(i_m^0.05)/g)^(1.052);
+i_b = i_m*k_e;
+
+D = D + i_b*dt;
+k_e;
+t = t + dt;
+
+end
+
+t_e_f = t
+
+
+%% Q2 - Part G
+values = 0:0.5:20;
+
+thrust_all = zeros(2,1);
+p_induced_all = zeros(2,1);
+p_tot_all = zeros(2,1);
+syms v
+
+for j = 1:length(values)
+    V = values(j);
+    D = 0.5*rho*V*V*S*cd;
+    alpha_d = atan(D/W);
+    eqn = v^4 +  (2*V*sin(alpha_d))*v^3 + V^2*v^2 - (W^2 + D^2)/(2*rho*A)^2 == 0;
+    thrust = sqrt(W^2 + D^2);
+    v_val = double(max(solve(eqn,v, 'Real',true)));
+    P_ind = thrust*(v_val);
+    P_tot = thrust*(v_val+ V*sin(alpha_d));
+
+    thrust_all(j) = thrust;
+    p_induced_all(j) = P_ind;
+    p_tot_all(j) = P_tot;
+end
+
+specific_power = p_tot_all./values';
+
+plot(values,thrust_all);
+hold on;
+plot(values,p_induced_all);
+plot(values,p_tot_all);
+plot(values,specific_power);
+
+legend({'Thrust','Induced Power','Total Power','Specific Total Power'})
+
+
+Answers:
+
+All powers in Watts
+All time in seconds
+
+part a =
+
+   40.1378 W
+
+part b =
+
+   1.2942e+03 s
+
+part c =
+
+   62.6388 W
+
+part d =
+
+  829.3264 s
+
+part e =
+
+  669.6810 s
+
+part f = 
+
+   262 s
+	
+part g = Plot added
+
+part h =
+
+  t_max =
+
+   1.7846e+03 s
+
+
+  V =
+
+   11.5000 m/s
+	
